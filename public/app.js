@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const intakeForm = document.getElementById('intake-form');
 
+    if (!intakeForm) return;
+
     intakeForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData.entries());
 
-        data.consent = data.consent === 'on';
+        data.consent = formData.get('consent') === 'on';
 
         try {
-            const response = await fetch('/api/register-patient', {
+            const response = await fetch(`${window.location.origin}/api/register-patient`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -18,18 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(data)
             });
 
-            const result = await response.json();
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const result = await response.json();
 
-            if (response.ok) {
-                alert(`Success: ${result.message}`);
-                intakeForm.reset();
+                if (response.ok) {
+                    alert(`Success: ${result.message}`);
+                    intakeForm.reset();
+                } else {
+                    alert(`Server Error: ${result.message}`);
+                }
             } else {
-                alert(`Error: ${result.message}`);
+                alert("The server returned an unexpected error.");
             }
 
         } catch (error) {
-            console.error("Fetch Error:", error);
-            alert("Could not connect to the server. Please check if server.js is running.");
+            alert("Could not connect to the server.");
         }
     });
 });

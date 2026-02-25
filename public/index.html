@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalsigns Intake Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Vitalsigns Intel</h1>
+            <p>Please, enter all the solicited information correctly.</p>
+        </header>
+
+        <form id="intake-form">
+            <fieldset id="account-info">
+                <legend>User Account Information</legend>
+
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required placeholder="John Forms">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.mx">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required minlength="8" placeholder="At least 8 characters">
+                </div>
+
+                <div class="form-group">
+                    <label for="birth_date">Date of Birth:</label>
+                    <input type="date" id="birth_date" name="birth_date" required>
+                </div>
+            </fieldset>
+
+            <fieldset id="medical-metrics">
+                <legend>Patient Physical Data</legend>
+
+                <div class="form-group">
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" name="height" required min="30" max="250" placeholder="e.g. 175">
+                </div>
+
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="radio-options">
+                        <input type="radio" id="gender-male" name="gender" value="male" required>
+                        <label for="gender-male">Male</label>
+
+                        <input type="radio" id="gender-female" name="gender" value="female">
+                        <label for="gender-female">Female</label>
+
+                        <input type="radio" id="gender-other" name="gender" value="other">
+                        <label for="gender-other">Other</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="blood_type">Blood Type:</label>
+                    <select id="blood_type" name="blood_type" required>
+                        <option value="" disabled selected>Select your type</option>
+                        <option value="a+">A+</option>
+                        <option value="a-">A-</option>
+                        <option value="b+">B+</option>
+                        <option value="b-">B-</option>
+                        <option value="o+">O+</option>
+                        <option value="o-">O-</option>
+                        <option value="ab+">AB+</option>
+                        <option value="ab-">AB-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="medical_history">Medical History:</label>
+                    <textarea id="medical_history" name="medical_history" rows="4" placeholder="Mention allergies or past surgeries..."></textarea>
+                </div>
+            </fieldset>
+
+            <div class="form-group consent-area">
+                <input type="checkbox" id="consent" name="consent" required>
+                <label for="consent">I accept the terms and conditions</label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" id="submit-btn" class="primary-button">Register Patient</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="public/app.js"></script>
+</body>
+</html>
+
+<!--
+
+Field 	Input Type 	Attributes
+Full Name 	text 	required, placeholder
+Email 	email 	required
+Password 	password 	minlength="8" (For their portal account)
+Date of Birth 	date 	required
+Height (cm) 	number 	min="30", max="250"
+Gender 	radio 	(Male / Female / Other)
+Blood Type 	select 	(A+, O-, etc.)
+Medical History 	textarea 	placeholder (e.g., allergies)
+Consent 	checkbox 	required (Accept terms)
+
+-->
